@@ -54,7 +54,7 @@ namespace Ovning11Garage2._0.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,VehicleType,RegistrationNumber,Color,Brand,Model,TimeOfParking")] ParkedVehicle parkedVehicle)
+        public async Task<IActionResult> Create([Bind("Id,VehicleType,RegistrationNumber,Color,Brand,Model,TimeOfParking,NumberOfWheels")] ParkedVehicle parkedVehicle)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Ovning11Garage2._0.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,VehicleType,RegistrationNumber,Color,Brand,Model,TimeOfParking")] ParkedVehicle parkedVehicle)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,VehicleType,RegistrationNumber,Color,Brand,Model,TimeOfParking,NumberOfWheels")] ParkedVehicle parkedVehicle)
         {
             if (id != parkedVehicle.Id)
             {
