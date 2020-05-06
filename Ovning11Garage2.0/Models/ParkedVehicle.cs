@@ -12,6 +12,7 @@ namespace Ovning11Garage2._0.Models
         public VehicleType VehicleType { get; set; }
      
         public string RegistrationNumber { get; set; }
+        public int NumberOfWheels { get; set; }
         public String Color { get; set; }
         public String Brand { get; set; }
         public String Model { get; set; }
@@ -25,6 +26,7 @@ namespace Ovning11Garage2._0.Models
     {
         Car,
         Boat,
+        MoterCycle,
         Buss,
         Airplane,
         Cycle
