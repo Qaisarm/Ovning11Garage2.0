@@ -40,7 +40,7 @@ namespace Ovning11Garage2._0
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/ParkedVehicles/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -55,7 +55,7 @@ namespace Ovning11Garage2._0
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Vehicles}/{action=Index}/{id?}");
+                    pattern: "{controller=ParkedVehicles}/{action=Index}/{id?}");
             });
         }
     }
