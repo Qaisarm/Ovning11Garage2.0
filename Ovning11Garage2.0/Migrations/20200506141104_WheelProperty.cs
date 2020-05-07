@@ -7,7 +7,7 @@ namespace Ovning11Garage2._0.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "NumnOfWheels",
+                name: "NumberOfWheels",
                 table: "ParkedVehicle",
                 nullable: false,
                 defaultValue: 0);
@@ -16,7 +16,7 @@ namespace Ovning11Garage2._0.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "NumnOfWheels",
+                name: "NumberOfWheels",
                 table: "ParkedVehicle");
         }
     }

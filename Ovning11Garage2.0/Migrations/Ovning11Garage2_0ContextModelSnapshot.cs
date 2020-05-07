@@ -35,7 +35,7 @@ namespace Ovning11Garage2._0.Migrations
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NumnOfWheels")
+                    b.Property<int>("NumberOfWheels")
                         .HasColumnType("int");
 
                     b.Property<string>("RegistrationNumber")
