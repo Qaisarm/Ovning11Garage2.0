@@ -13,9 +13,9 @@ namespace Ovning11Garage2._0.Models
      
         public string RegistrationNumber { get; set; }
         public int NumberOfWheels { get; set; }
-        public String Color { get; set; }
-        public String Brand { get; set; }
-        public String Model { get; set; }
+        public string Color { get; set; }
+        public string Brand { get; set; }
+        public string Model { get; set; }
         
 
         //Arival Time
