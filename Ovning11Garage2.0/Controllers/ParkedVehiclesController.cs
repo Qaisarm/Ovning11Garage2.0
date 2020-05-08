@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,12 +8,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Ovning11Garage2._0.Data;
 using Ovning11Garage2._0.Models;
+using Ovning11Garage2._0.Models.ViewModels;
 
 namespace Ovning11Garage2._0.Controllers
 {
     public class ParkedVehiclesController : Controller
     {
         private readonly Ovning11Garage2_0Context _context;
+
+      
 
         public ParkedVehiclesController(Ovning11Garage2_0Context context)
         {
@@ -23,6 +27,19 @@ namespace Ovning11Garage2._0.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.ParkedVehicle.ToListAsync());
+        }
+
+      // GET: ParkedVehicles Overview
+        public async Task<IActionResult> Overview()
+        {
+            var parkedVehicle = await _context.ParkedVehicle.ToListAsync();
+            var model = parkedVehicle.Select(v => new ParkedVehicleViewModel() {
+                VehicleType = v.VehicleType,
+                RegistrationNumber = v.RegistrationNumber,
+                Color = v.Color,
+                TimeOfParking = v.TimeOfParking}).ToList();
+                 
+            return View(model);
         }
 
         // GET: ParkedVehicles/Details/5
