@@ -55,7 +55,7 @@ namespace Ovning11Garage2._0
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=ParkedVehicles}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
