@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Ovning11Garage2._0.Data;
 using Ovning11Garage2._0.Models;
 using Ovning11Garage2._0.Models.ViewModels;
@@ -75,6 +76,20 @@ namespace Ovning11Garage2._0.Controllers
         {
             if (ModelState.IsValid)
             {
+                parkedVehicle.TimeOfParking = DateTime.Now;
+                // Check whether the Vehicle with same Registration Number is Parked or not
+                var findRegistrationNr = _context.ParkedVehicle
+                    .Where(rn => rn.RegistrationNumber == parkedVehicle.RegistrationNumber).ToList();
+                if (findRegistrationNr.Count ==0)
+                {
+                    _context.Add(parkedVehicle);
+                }
+                else
+                {
+                    ModelState.AddModelError("RegistrationNumber", "Vehicle with same Registration Number is already Parked");
+                    return View();
+                
+                        }
                 _context.Add(parkedVehicle);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -89,12 +104,14 @@ namespace Ovning11Garage2._0.Controllers
             {
                 return NotFound();
             }
-
+            
             var parkedVehicle = await _context.ParkedVehicle.FindAsync(id);
+
             if (parkedVehicle == null)
             {
                 return NotFound();
             }
+            
             return View(parkedVehicle);
         }
 
@@ -103,8 +120,9 @@ namespace Ovning11Garage2._0.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,VehicleType,RegistrationNumber,Color,Brand,Model,TimeOfParking,NumberOfWheels")] ParkedVehicle parkedVehicle)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,VehicleType,RegistrationNumber,Color,Brand,Model,NumberOfWheels")] ParkedVehicle parkedVehicle)
         {
+            // Do not Update Time Of Parking with change in other properties of a Vehicle
             if (id != parkedVehicle.Id)
             {
                 return NotFound();
@@ -112,10 +130,27 @@ namespace Ovning11Garage2._0.Controllers
 
             if (ModelState.IsValid)
             {
+                
                 try
                 {
-                    _context.Update(parkedVehicle);
-                    await _context.SaveChangesAsync();
+                    var editPostData = await _context.ParkedVehicle.FindAsync(id);
+                    if (editPostData == null)
+                    {
+                        return NotFound();
+
+                    }
+                    else
+                    {
+                        editPostData.VehicleType = parkedVehicle.VehicleType;
+                        editPostData.RegistrationNumber = parkedVehicle.RegistrationNumber;
+                        editPostData.Color = parkedVehicle.Color;
+                        editPostData.Brand = parkedVehicle.Brand;
+                        editPostData.Model = parkedVehicle.Model;
+                        editPostData.NumberOfWheels = parkedVehicle.NumberOfWheels;
+
+                        await _context.SaveChangesAsync();
+                    }
+                    
                 }
                 catch (DbUpdateConcurrencyException)
                 {
