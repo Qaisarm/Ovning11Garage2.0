@@ -44,6 +44,51 @@ namespace Ovning11Garage2._0.Controllers
             return View(nameof(Index), await model.ToListAsync());
         }
 
+        // Reciept Genration
+
+        public async Task<IActionResult> Receipt(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var parkedVehicle = await _context.ParkedVehicle.FirstOrDefaultAsync(m => m.Id == id);
+
+            if (parkedVehicle == null)
+            {
+                return NotFound();
+            }
+
+            var model = new ReceiptViewModel
+            {
+                RegistrationNumber = parkedVehicle.RegistrationNumber,
+                VehicleType = parkedVehicle.VehicleType,
+                TimeOfParking = parkedVehicle.TimeOfParking
+            };
+            
+            model.TimeOfCheckOut = DateTime.Now;
+            var parkingFee = 15;
+            var totalTime = model.TimeOfCheckOut - model.TimeOfParking;
+            var timeInMinuets = (totalTime.Minutes > 0) ? 1 : 0;
+
+
+            if (totalTime.Days == 0)
+            {
+                model.TotalTime = totalTime.Hours + " Hours " + totalTime.Minutes + " " + " Minutes";
+                model.TotalPrice = ((totalTime.Hours + timeInMinuets) * parkingFee) + " " + "SEK";
+            }
+            else
+            {
+                model.TotalTime = totalTime.Days + "Days" + " " + totalTime.Hours + "Hours" + " " + totalTime.Minutes + "Minuets";
+                model.TotalPrice = (totalTime.Days * parkingFee* 10) + ((totalTime.Hours + timeInMinuets) * parkingFee) + " " + "SEK";
+            }
+
+            _context.ParkedVehicle.Remove(parkedVehicle);
+            await _context.SaveChangesAsync();
+
+            return View(model);
+        }
 
         // GET: ParkedVehicles Overview
         public async Task<IActionResult> Overview()
@@ -207,8 +252,11 @@ namespace Ovning11Garage2._0.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var parkedVehicle = await _context.ParkedVehicle.FindAsync(id);
-            _context.ParkedVehicle.Remove(parkedVehicle);
-            await _context.SaveChangesAsync();
+
+           // _context.ParkedVehicle.Remove(parkedVehicle);
+
+            //await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
