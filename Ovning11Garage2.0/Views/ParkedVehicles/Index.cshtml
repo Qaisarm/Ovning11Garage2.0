@@ -5,7 +5,19 @@
 }
 
     <h1>Parked Vehicles</h1>
-
+    <form asp-action="Filter">
+        <div class="input-group m-3">
+            <input type="text" name="registrationNumber" class="form-control" placeholder="Search on Registration Number" />
+            <div class="input-group-append">
+                <select name="vehicleType" asp-items="@Html.GetEnumSelectList<VehicleType>()" class="form-control">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+            </div>
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-search">&emsp;Search</i></button>
+            </div>
+        </div>
+    </form>
 <p>
     <a asp-action="Create">Park New Vehicle</a>
 </p>
