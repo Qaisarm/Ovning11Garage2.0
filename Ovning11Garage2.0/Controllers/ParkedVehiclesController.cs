@@ -30,7 +30,22 @@ namespace Ovning11Garage2._0.Controllers
             return View(await _context.ParkedVehicle.ToListAsync());
         }
 
-      // GET: ParkedVehicles Overview
+        /* Search Based on Registration Number and Vehicle Type*/
+        public async Task<IActionResult> Filter(string registrationNumber, int? vehicleType)
+        {
+
+           var model = string.IsNullOrWhiteSpace(registrationNumber) ?
+                  _context.ParkedVehicle :
+                   _context.ParkedVehicle.Where(rn => rn.RegistrationNumber
+                                .Contains(registrationNumber));
+            model = vehicleType == null ?
+                model :
+                model.Where(m => m.VehicleType == (VehicleType)vehicleType);
+            return View(nameof(Index), await model.ToListAsync());
+        }
+
+
+        // GET: ParkedVehicles Overview
         public async Task<IActionResult> Overview()
         {
             var parkedVehicle = await _context.ParkedVehicle.ToListAsync();
