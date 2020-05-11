@@ -1,0 +1,69 @@
+﻿@model ReceiptViewModel
+@{
+    ViewData["Title"] = "Receipt";
+}
+
+@{
+    ViewData["Title"] = "Receipt";
+}
+
+
+
+<div id="print" >
+    <h1  >Receipt</h1>
+    <br />
+    <div>
+        <h3>Check out completed Successfully!</h3>
+
+        <h4>Thankyou for using the parking. Drive Safe</h4>
+
+        <strong>
+            Total Amount Paid:  @Html.DisplayFor(model => model.TotalPrice)
+
+        </strong>
+    </div>
+    <div >
+        <dl class="row bg #f0ad4e pl-sm-5 ">
+            <dt class="col-sm-6 pl-sm-5">
+                @Html.DisplayNameFor(model => model.VehicleType)
+            </dt>
+            <dd class="col-sm-6 text-left">
+                @Html.DisplayFor(model => model.VehicleType)
+            </dd>
+            <dt class="col-sm-6 pl-sm-5">
+                @Html.DisplayNameFor(model => model.RegistrationNumber)
+            </dt>
+            <dd class="col-sm-6 ">
+                @Html.DisplayFor(model => model.RegistrationNumber)
+            </dd>
+            <dt class="col-sm-6 pl-sm-5">
+                @Html.DisplayNameFor(model => model.TimeOfParking)
+            </dt>
+            <dd class="col-sm-6 ">
+                @Html.DisplayFor(model => model.TimeOfParking)
+            </dd>
+            <dt class="col-sm-6 pl-sm-5">
+                @Html.DisplayNameFor(model => model.TimeOfCheckOut)
+            </dt>
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.TimeOfCheckOut)
+            </dd>
+            <dt class="col-sm-6 pl-sm-5">
+                @Html.DisplayNameFor(model => model.TotalTime)
+            </dt>
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.TotalTime)
+            </dd>
+            <dt class="col-sm-6 pl-sm-5">
+                @Html.DisplayNameFor(model => model.TotalPrice)
+            </dt>
+            <dd class="col-sm-6 ">
+                @Html.DisplayFor(model => model.TotalPrice)
+            </dd>
+
+        </dl>
+    </div>
+</div>
+<div class="row align-content-center justify-content-center">
+    <input class="btn-primary btn-lg mt-3" type="button" onclick="printReceipt('print')" value="Print Receipt">
+</div>

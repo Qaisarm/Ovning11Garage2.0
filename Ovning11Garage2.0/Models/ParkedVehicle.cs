@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,9 +17,10 @@ namespace Ovning11Garage2._0.Models
         public string Color { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
-        
+
 
         //Arival Time
+        [DisplayFormat(DataFormatString = "{0:f}")]
         public DateTime TimeOfParking { get; set; }
     }
 
