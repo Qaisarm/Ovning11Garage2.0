@@ -28,17 +28,23 @@ namespace Ovning11Garage2._0.Controllers
         {
             return View(await _context.ParkedVehicle.ToListAsync());
         }
+        public async Task<IActionResult> Overview1()
+        {
+            return View(await _context.ParkedVehicle.ToListAsync());
+        }
 
-      // GET: ParkedVehicles Overview
+        // GET: ParkedVehicles Overview
         public async Task<IActionResult> Overview()
         {
             var parkedVehicle = await _context.ParkedVehicle.ToListAsync();
-            var model = parkedVehicle.Select(v => new ParkedVehicleViewModel() {
+            var model = parkedVehicle.Select(v => new ParkedVehicleViewModel()
+            {
                 VehicleType = v.VehicleType,
                 RegistrationNumber = v.RegistrationNumber,
                 Color = v.Color,
-                TimeOfParking = v.TimeOfParking}).ToList();
-                 
+                TimeOfParking = v.TimeOfParking
+            }).ToList();
+
             return View(model);
         }
 
