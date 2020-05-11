@@ -19,11 +19,11 @@ namespace Ovning11Garage2._0.Models
         [Required]
         [Range(2, 8)]
         public int NumberOfWheels { get; set; }
-        public String Color { get; set; }
+        public string Color { get; set; }
         [Required]
-        public String Brand { get; set; }
+        public string Brand { get; set; }
         [Required]
-        public String Model { get; set; }
+        public string Model { get; set; }
         
 
         //Arival Time

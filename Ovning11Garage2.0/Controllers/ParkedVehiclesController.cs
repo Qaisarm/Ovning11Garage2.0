@@ -44,6 +44,29 @@ namespace Ovning11Garage2._0.Controllers
             return View(nameof(Index), await model.ToListAsync());
         }
 
+        /* Search Based on Registration Number and Vehicle Type*/
+        public async Task<IActionResult> Filter1(string registrationNumber, int? vehicleType)
+        {
+
+            var model = string.IsNullOrWhiteSpace(registrationNumber) ?
+                   _context.ParkedVehicle :
+                    _context.ParkedVehicle.Where(rn => rn.RegistrationNumber
+                                 .Contains(registrationNumber));
+            model = vehicleType == null ?
+                model :
+                model.Where(m => m.VehicleType == (VehicleType)vehicleType);
+            var viewmodel = model.Select(v => new PVOverview2()
+            {
+                VehicleType = v.VehicleType,
+                RegistrationNumber = v.RegistrationNumber,
+                NumberOfWheels = v.NumberOfWheels,
+
+            });
+
+
+            return View(nameof(Overview1), await viewmodel.ToListAsync());
+        }
+
         // Reciept Genration
 
         public async Task<IActionResult> Receipt(int? id)
@@ -85,7 +108,7 @@ namespace Ovning11Garage2._0.Controllers
             }
 
             _context.ParkedVehicle.Remove(parkedVehicle);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(); //save the remove action 
 
             return View(model);
         }
@@ -98,8 +121,24 @@ namespace Ovning11Garage2._0.Controllers
                 VehicleType = v.VehicleType,
                 RegistrationNumber = v.RegistrationNumber,
                 Color = v.Color,
-                TimeOfParking = v.TimeOfParking}).ToList();
+                TimeOfParking = v.TimeOfParking 
+            }).ToList(); 
                  
+            return View(model);
+        }
+
+        //overview for other attribute
+        public async Task<IActionResult> Overview1()
+        {
+            var parkedVehicle = await _context.ParkedVehicle.ToListAsync();
+            var model = parkedVehicle.Select(v => new PVOverview2()
+            {
+                VehicleType = v.VehicleType,
+                RegistrationNumber = v.RegistrationNumber,
+                NumberOfWheels=v.NumberOfWheels
+               
+            }).ToList();
+
             return View(model);
         }
 

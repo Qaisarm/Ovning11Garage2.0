@@ -1,13 +1,24 @@
-﻿@model IEnumerable<Ovning11Garage2._0.Models.ParkedVehicle>
+﻿@model IEnumerable<Ovning11Garage2._0.Models.ViewModels.PVOverview2>
 
 @{
     ViewData["Title"] = "Overview1";
 }
 
-<h1>Index</h1>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>Overview for Number of Wheels</h1>
+<form asp-action="Filter1">
+    <div class="input-group m-3">
+        <input type="text" name="registrationNumber" class="form-control" placeholder="Search on Registration Number" />
+        <div class="input-group-append">
+            <select name="vehicleType" asp-items="@Html.GetEnumSelectList<VehicleType>()" class="form-control">
+                <option selected="selected" value="">Please select</option>
+            </select>
+        </div>
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-search">&emsp;Search</i></button>
+        </div>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -18,12 +29,9 @@
                 @Html.DisplayNameFor(model => model.RegistrationNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Color)
+                @Html.DisplayNameFor(model => model.NumberOfWheels)
             </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.TimeOfParking)
-            </th>
 
             <th></th>
         </tr>
@@ -39,18 +47,15 @@
                     @Html.DisplayFor(modelItem => item.RegistrationNumber)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Color)
+                    @Html.DisplayFor(modelItem => item.NumberOfWheels)
                 </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.TimeOfParking)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
+
+
             </tr>
         }
     </tbody>
 </table>
+<div>
+    <a asp-action="Index">Back to Garage</a>
+</div>
