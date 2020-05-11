@@ -137,10 +137,11 @@ namespace Ovning11Garage2._0.Controllers
             if (ModelState.IsValid)
             {
                 parkedVehicle.TimeOfParking = DateTime.Now;
+
                 // Check whether the Vehicle with same Registration Number is Parked or not
                 var findRegistrationNr = _context.ParkedVehicle
                     .Where(rn => rn.RegistrationNumber == parkedVehicle.RegistrationNumber).ToList();
-                if (findRegistrationNr.Count ==0)
+                if (findRegistrationNr.Count == 0)
                 {
                     _context.Add(parkedVehicle);
                 }
@@ -150,7 +151,7 @@ namespace Ovning11Garage2._0.Controllers
                     return View();
                 
                         }
-                _context.Add(parkedVehicle);
+                
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
