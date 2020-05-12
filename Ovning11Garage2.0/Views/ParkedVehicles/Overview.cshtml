@@ -3,28 +3,21 @@
 @{
     ViewData["Title"] = "Overview";
 }
+    
 
     <h3>Overview of Parked Vehicles</h3>
+  
 
-<p>
-    <a asp-action="Create">Park</a>
-</p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
+                        <th>
                 @Html.DisplayNameFor(model => model.VehicleType)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RegistrationNumber)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Color)
-            </th>
-            
+           
             <th>
                 @Html.DisplayNameFor(model => model.TimeOfParking)
             </th>
@@ -35,28 +28,23 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.VehicleType)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RegistrationNumber)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Color)
-            </td>
+            
            
             <td>
                 @Html.DisplayFor(modelItem => item.TimeOfParking)
             </td>
-              <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">UnPark</a>
-            </td>
+             
         </tr>
 }
     </tbody>
 </table>
+<div>
+    <a asp-action="Index">Back to Garage</a>
+</div>

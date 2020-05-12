@@ -4,7 +4,7 @@
     ViewData["Title"] = "Overview1";
 }
 
-<h1>Overview for Number of Wheels</h1>
+<h1>Overview for Other Properties</h1>
 <form asp-action="Filter1">
     <div class="input-group m-3">
         <input type="text" name="registrationNumber" class="form-control" placeholder="Search on Registration Number" />
@@ -22,16 +22,22 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.VehicleType)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.RegistrationNumber)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.NumberOfWheels)
             </th>
-
 
             <th></th>
         </tr>
@@ -39,20 +45,27 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VehicleType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RegistrationNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumberOfWheels)
-                </td>
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfWheels)
+            </td>
 
 
 
-            </tr>
+        </tr>
         }
     </tbody>
 </table>

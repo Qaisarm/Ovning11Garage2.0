@@ -57,8 +57,11 @@ namespace Ovning11Garage2._0.Controllers
                 model.Where(m => m.VehicleType == (VehicleType)vehicleType);
             var viewmodel = model.Select(v => new PVOverview2()
             {
-                VehicleType = v.VehicleType,
+                
                 RegistrationNumber = v.RegistrationNumber,
+                Color = v.Color,
+                Brand = v.Brand,
+                Model = v.Model,             
                 NumberOfWheels = v.NumberOfWheels,
 
             });
@@ -120,7 +123,6 @@ namespace Ovning11Garage2._0.Controllers
             var model = parkedVehicle.Select(v => new ParkedVehicleViewModel() {
                 VehicleType = v.VehicleType,
                 RegistrationNumber = v.RegistrationNumber,
-                Color = v.Color,
                 TimeOfParking = v.TimeOfParking 
             }).ToList(); 
                  
@@ -133,9 +135,12 @@ namespace Ovning11Garage2._0.Controllers
             var parkedVehicle = await _context.ParkedVehicle.ToListAsync();
             var model = parkedVehicle.Select(v => new PVOverview2()
             {
-                VehicleType = v.VehicleType,
+                
                 RegistrationNumber = v.RegistrationNumber,
-                NumberOfWheels=v.NumberOfWheels
+                Color = v.Color,
+                Brand = v.Brand,
+                Model = v.Model,
+                NumberOfWheels =v.NumberOfWheels
                
             }).ToList();
 
